@@ -3,45 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Food in SLO · Find a bite by time</title>
-  <meta name="description" content="A sample time-of-day food picker for visitors to San Luis Obispo.">
+  <title>Food in SLO · Pick a time, find a table</title>
+  <meta name="description" content="A source-checked, time-of-day restaurant guide for San Luis Obispo, California.">
   <style>
-    :root{--ink:#13374a;--ocean:#047c98;--surf:#9ed9d0;--sand:#fff2d8;--foam:#fdfbf4;--sun:#ffb642;--coral:#e85e4f;--muted:#53717d;--line:#c5ded9;--shadow:0 18px 45px rgba(19,55,74,.13)}
-    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;color:var(--ink);background:var(--foam);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 12% 0,rgba(255,182,66,.3),transparent 23rem),linear-gradient(180deg,#d9f0e9 0, #fdfbf4 42%)}
-    a{color:inherit;text-underline-offset:4px}.shell{width:min(1120px,92vw);margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;padding:24px 0;border-bottom:1px solid rgba(19,55,74,.2);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}.brand{font-weight:800;color:var(--ocean)}.tag{color:var(--muted)}
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:3rem;padding:clamp(3.25rem,8vw,6.5rem) 0 3.25rem}.eyebrow{display:inline-flex;align-items:center;gap:.5rem;margin:0 0 1rem;font-size:.78rem;letter-spacing:.14em;font-weight:800;text-transform:uppercase;color:var(--ocean)}.eyebrow:before{content:"";height:.6rem;width:.6rem;border-radius:50%;background:var(--coral)}
-    h1{max-width:720px;margin:0;font-family:Georgia,serif;font-size:clamp(3.4rem,7vw,6.6rem);line-height:.91;letter-spacing:-.06em;font-weight:500}.hero p{max-width:570px;margin:1.5rem 0 0;font-size:1.1rem;color:#305564}.hero strong{color:var(--ocean)}
-    .food-art{position:relative;min-height:330px;display:grid;place-items:center}.sun{position:absolute;top:10px;right:7%;width:92px;height:92px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 13px rgba(255,182,66,.2)}.wave{position:absolute;bottom:10px;left:4%;width:90%;height:88px;border-radius:55% 45% 0 0;background:var(--surf);transform:rotate(-5deg)}.plate{position:relative;z-index:1;width:min(300px,70vw);aspect-ratio:1;border-radius:50%;background:#fff7e8;border:15px solid #e8f1e8;box-shadow:inset 0 0 0 2px #bdd9d2,var(--shadow);display:grid;place-items:center;transform:rotate(-7deg)}.bowl{width:65%;height:42%;border-radius:0 0 100px 100px;background:linear-gradient(180deg,#e85e4f 0 50%,#cc493e 50%);position:relative;overflow:hidden}.bowl:before{content:"";position:absolute;width:150%;height:85%;left:-25%;top:-43%;border-radius:50%;background:repeating-radial-gradient(circle at 45% 70%,#ffe678 0 10px,#75a85d 11px 21px,#e85e4f 22px 29px)}.fork{position:absolute;z-index:2;right:15%;bottom:15%;width:15px;height:120px;background:var(--ink);border-radius:10px;transform:rotate(42deg)}.fork:before{content:"";position:absolute;top:-18px;left:-14px;width:43px;height:35px;border-bottom:10px solid var(--ink);border-radius:0 0 50% 50%;background:repeating-linear-gradient(90deg,transparent 0 8px,var(--ink) 8px 12px)}
-    .picker{padding:1.5rem 0 4rem}.panel{border:1px solid var(--line);border-radius:28px;background:rgba(253,251,244,.88);padding:clamp(1.25rem,4vw,2.6rem);box-shadow:var(--shadow)}.panel-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}.panel h2{margin:0;font:500 clamp(2rem,4vw,3.2rem)/1 Georgia,serif;letter-spacing:-.04em}.sample-note{margin:.75rem 0 0;color:var(--muted);font-size:.9rem}.time-buttons{display:flex;gap:.65rem;flex-wrap:wrap;margin:1.75rem 0 2rem}.time-button{border:1px solid var(--line);border-radius:999px;padding:.7rem 1rem;color:var(--ink);background:#fffdf7;font:inherit;font-weight:750;cursor:pointer;transition:transform .16s ease,background .16s ease,color .16s ease,border-color .16s ease}.time-button:hover{transform:translateY(-2px);border-color:var(--ocean)}.time-button[aria-pressed="true"]{background:var(--ocean);border-color:var(--ocean);color:white}.time-button:focus-visible,.card-link:focus-visible{outline:3px solid var(--coral);outline-offset:4px}
-    .selection{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-top:1px solid var(--line);padding-top:1.2rem}.selection p{margin:0;color:var(--muted)}.selection h3{margin:0;font-size:1.1rem}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:1.2rem}.card{overflow:hidden;border:1px solid var(--line);border-radius:20px;background:white;box-shadow:0 8px 20px rgba(19,55,74,.06)}.card-art{height:125px;display:flex;align-items:center;justify-content:center;font-size:4rem;background:var(--card-bg);position:relative}.card-art:after{content:"";position:absolute;width:125%;height:50px;bottom:-30px;border-radius:50%;background:rgba(255,255,255,.35)}.card-content{padding:1.1rem}.card-kicker{margin:0;color:var(--ocean);font-size:.73rem;letter-spacing:.11em;font-weight:800;text-transform:uppercase}.card h4{margin:.3rem 0 .5rem;font:500 1.5rem/1.05 Georgia,serif;letter-spacing:-.03em}.card p{margin:0;color:var(--muted);font-size:.91rem}.facts{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin:1rem 0 0}.fact{min-height:54px;border-radius:12px;padding:.48rem .6rem;background:var(--sand)}.fact span{display:block;font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#52727c}.fact b{font-size:.85rem}.card-link{display:inline-block;margin-top:1rem;font-weight:800;color:var(--ocean);text-decoration:none}.card-link:hover{text-decoration:underline}
-    .rule{display:flex;gap:.9rem;align-items:flex-start;margin:2.5rem 0 0;padding:1rem 1.1rem;border-radius:15px;background:#d9f0e9;color:#235867}.rule b{color:var(--ocean);white-space:nowrap}.how{display:grid;grid-template-columns:.7fr 1.3fr;gap:3rem;padding:3rem 0 5rem}.how h2{margin:0;font:500 clamp(2rem,4vw,3.2rem)/1 Georgia,serif;letter-spacing:-.04em}.how p{margin:.3rem 0 0;color:var(--muted)}.steps{display:grid;gap:1rem}.step{display:flex;gap:1rem;padding:1rem 0;border-top:1px solid var(--line)}.number{display:grid;place-items:center;flex:0 0 31px;height:31px;border-radius:50%;background:var(--coral);color:white;font-size:.85rem;font-weight:800}.step h3{margin:0}.step p{margin:.15rem 0 0}.footer{padding:1.7rem 0 2.5rem;border-top:1px solid rgba(19,55,74,.2);color:var(--muted);font-size:.88rem}.footer p{margin:0}
-    @media(max-width:780px){.hero,.how{grid-template-columns:1fr}.hero{gap:1rem;padding-top:3.5rem}.food-art{min-height:230px;order:-1}.plate{width:220px}.cards{grid-template-columns:1fr}.card{display:grid;grid-template-columns:120px 1fr}.card-art{height:auto;min-height:100%;font-size:3rem}.card-content{padding:1rem}.facts{margin-top:.7rem}.how{gap:1.4rem}}@media(max-width:500px){.topbar{align-items:flex-start;gap:1rem;line-height:1.35}.tag{text-align:right}.panel{border-radius:20px}.selection{align-items:flex-start;flex-direction:column;gap:.3rem}.card{display:block}.card-art{height:115px}.facts{grid-template-columns:1fr 1fr}.rule{display:block}.rule b{display:block;margin-bottom:.35rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.time-button{transition:none}.time-button:hover{transform:none}}
+    :root{--ink:#103a4e;--ocean:#047d9b;--seafoam:#c9ebe2;--sand:#fff1d4;--cream:#fffdf8;--sun:#ffb43d;--coral:#e7604e;--muted:#50707c;--line:#bfded7;--shadow:0 18px 46px rgba(16,58,78,.14)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 10% 0,rgba(255,180,61,.28),transparent 24rem),linear-gradient(180deg,#dff3ee 0,#fffdf8 43%)}
+    a{color:inherit;text-underline-offset:4px}.shell{width:min(1120px,92vw);margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;padding:23px 0;border-bottom:1px solid rgba(16,58,78,.2);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase}.brand{font-weight:850;color:var(--ocean);text-decoration:none}.tag{color:var(--muted)}
+    .hero{display:grid;grid-template-columns:1.12fr .88fr;gap:3rem;align-items:center;padding:clamp(3.4rem,8vw,6.6rem) 0 3.1rem}.eyebrow{display:flex;align-items:center;gap:.5rem;margin:0 0 1rem;color:var(--ocean);font-size:.78rem;letter-spacing:.14em;font-weight:800;text-transform:uppercase}.eyebrow:before{content:"";width:.6rem;height:.6rem;border-radius:50%;background:var(--coral)}h1{max-width:720px;margin:0;font:500 clamp(3.4rem,7vw,6.5rem)/.91 Georgia,serif;letter-spacing:-.06em}.hero p{max-width:580px;margin:1.4rem 0 0;color:#315866;font-size:1.08rem}.hero strong{color:var(--ocean)}
+    .food-art{position:relative;min-height:330px;display:grid;place-items:center}.sun{position:absolute;top:11px;right:7%;width:92px;height:92px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 13px rgba(255,180,61,.2)}.wave{position:absolute;bottom:10px;left:4%;width:91%;height:88px;border-radius:55% 45% 0 0;background:var(--seafoam);transform:rotate(-5deg)}.plate{position:relative;z-index:1;width:min(300px,70vw);aspect-ratio:1;border-radius:50%;background:#fff7e8;border:15px solid #e8f1e8;box-shadow:inset 0 0 0 2px #bdd9d2,var(--shadow);display:grid;place-items:center;transform:rotate(-7deg)}.bowl{width:65%;height:42%;border-radius:0 0 100px 100px;background:linear-gradient(180deg,#e85e4f 0 50%,#cc493e 50%);position:relative;overflow:hidden}.bowl:before{content:"";position:absolute;width:150%;height:85%;left:-25%;top:-43%;border-radius:50%;background:repeating-radial-gradient(circle at 45% 70%,#ffe678 0 10px,#75a85d 11px 21px,#e85e4f 22px 29px)}.fork{position:absolute;z-index:2;right:15%;bottom:15%;width:15px;height:120px;background:var(--ink);border-radius:10px;transform:rotate(42deg)}.fork:before{content:"";position:absolute;top:-18px;left:-14px;width:43px;height:35px;border-bottom:10px solid var(--ink);border-radius:0 0 50% 50%;background:repeating-linear-gradient(90deg,transparent 0 8px,var(--ink) 8px 12px)}
+    .picker{padding:1.5rem 0 3.5rem}.panel{border:1px solid var(--line);border-radius:28px;background:rgba(255,253,248,.89);padding:clamp(1.3rem,4vw,2.6rem);box-shadow:var(--shadow)}.panel h2{margin:0;font:500 clamp(2rem,4vw,3.1rem)/1 Georgia,serif;letter-spacing:-.04em}.research-note{max-width:720px;margin:.8rem 0 0;color:var(--muted);font-size:.92rem}.time-buttons{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.65rem 0 1.8rem}.time-button{border:1px solid var(--line);border-radius:999px;padding:.7rem 1rem;background:#fffef9;color:var(--ink);font:inherit;font-weight:780;cursor:pointer;transition:transform .16s ease,background .16s ease,color .16s ease,border-color .16s ease}.time-button:hover{transform:translateY(-2px);border-color:var(--ocean)}.time-button[aria-pressed="true"]{border-color:var(--ocean);background:var(--ocean);color:#fff}.time-button:focus-visible,.source-link:focus-visible{outline:3px solid var(--coral);outline-offset:4px}
+    .selection{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-top:1px solid var(--line);padding-top:1.15rem}.selection h3{margin:0;font-size:1.08rem}.selection p{margin:0;color:var(--muted)}.cards{margin-top:1.15rem}.card{overflow:hidden;display:grid;grid-template-columns:220px 1fr;border:1px solid var(--line);border-radius:21px;background:#fff;box-shadow:0 8px 20px rgba(16,58,78,.06)}.card-art{display:grid;place-items:center;min-height:100%;font-size:5rem;background:var(--card-bg);position:relative}.card-art:after{content:"";position:absolute;width:130%;height:60px;bottom:-36px;border-radius:50%;background:rgba(255,255,255,.32)}.card-content{padding:1.35rem}.kicker{margin:0;color:var(--ocean);font-size:.73rem;font-weight:850;letter-spacing:.11em;text-transform:uppercase}.card h4{margin:.28rem 0 .55rem;font:500 clamp(1.7rem,3vw,2.2rem)/1 Georgia,serif;letter-spacing:-.035em}.description{max-width:610px;margin:0;color:var(--muted)}.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:.58rem;margin:1.1rem 0 0}.fact{min-height:62px;padding:.55rem .65rem;border-radius:12px;background:var(--sand)}.fact span{display:block;font-size:.65rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#52727c}.fact b{display:block;margin-top:.08rem;font-size:.86rem;line-height:1.25}.sources{display:flex;flex-wrap:wrap;gap:.75rem 1rem;margin-top:1rem}.source-link{color:var(--ocean);font-weight:800}.source-link:hover{text-decoration-thickness:2px}
+    .truth{display:flex;gap:.85rem;align-items:flex-start;margin:2rem 0 0;padding:1rem 1.08rem;border-radius:15px;background:#d9f0e9;color:#235867}.truth b{color:var(--ocean);white-space:nowrap}.how{display:grid;grid-template-columns:.72fr 1.28fr;gap:3rem;padding:3rem 0 5rem}.how h2{margin:0;font:500 clamp(2rem,4vw,3.1rem)/1 Georgia,serif;letter-spacing:-.04em}.how>div>p{margin:.45rem 0 0;color:var(--muted)}.steps{display:grid;gap:1rem}.step{display:flex;gap:1rem;padding:1rem 0;border-top:1px solid var(--line)}.number{display:grid;place-items:center;flex:0 0 31px;height:31px;border-radius:50%;background:var(--coral);color:#fff;font-size:.85rem;font-weight:850}.step h3{margin:0}.step p{margin:.15rem 0 0;color:var(--muted)}.footer{padding:1.7rem 0 2.5rem;border-top:1px solid rgba(16,58,78,.2);color:var(--muted);font-size:.88rem}.footer p{margin:0}
+    @media(max-width:800px){.hero,.how{grid-template-columns:1fr}.hero{gap:1rem;padding-top:3.5rem}.food-art{min-height:235px;order:-1}.plate{width:220px}.card{grid-template-columns:140px 1fr}.card-art{font-size:3.8rem}.facts{grid-template-columns:1fr 1fr}.how{gap:1.5rem}}@media(max-width:520px){.topbar{align-items:flex-start;gap:1rem;line-height:1.35}.tag{text-align:right}.panel{border-radius:20px}.selection{align-items:flex-start;flex-direction:column;gap:.3rem}.card{display:block}.card-art{min-height:120px}.card-content{padding:1.1rem}.truth{display:block}.truth b{display:block;margin-bottom:.3rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.time-button{transition:none}.time-button:hover{transform:none}}
   </style>
 </head>
 <body>
   <main class="shell">
     <header class="topbar">
       <a class="brand" href="#" aria-label="Food in SLO home">Food in SLO</a>
-      <span class="tag">Sample visitor guide · San Luis Obispo, CA</span>
+      <span class="tag">Source-checked restaurant guide</span>
     </header>
-
     <section class="hero" aria-labelledby="page-title">
       <div>
         <p class="eyebrow">Eat with the sun</p>
         <h1 id="page-title">Your next SLO bite starts with the time.</h1>
-        <p>Pick the moment. We’ll point you toward a <strong>sample food match</strong> with a price, typical wait, and coastal-casual mood already in view.</p>
+        <p>Pick the moment. Get a <strong>real SLO restaurant</strong> with source-checked hours, a listed menu price, and the setting it actually describes.</p>
       </div>
-      <div class="food-art" aria-label="Illustration of a colorful food bowl in the California sunshine" role="img">
+      <div class="food-art" aria-label="Illustration of a colorful food bowl in California sunshine" role="img">
         <div class="sun"></div><div class="wave"></div><div class="plate"><div class="bowl"></div></div><div class="fork"></div>
       </div>
     </section>
-
     <section class="picker" aria-labelledby="picker-title">
       <div class="panel">
-        <div class="panel-head">
-          <div><h2 id="picker-title">What time are you hungry?</h2><p class="sample-note">Sample recommendations and estimates — verify real restaurant details before visiting.</p></div>
-        </div>
+        <h2 id="picker-title">What time are you hungry?</h2>
+        <p class="research-note">Research checked September 11, 2026 from restaurant-owned sites or their official ordering pages. Menus, prices, and hours can change; use the source links before you go. A static guide cannot provide trustworthy live wait times.</p>
         <div class="time-buttons" role="group" aria-label="Choose a time of day">
           <button class="time-button" type="button" data-time="breakfast" aria-pressed="false">Breakfast</button>
           <button class="time-button" type="button" data-time="lunch" aria-pressed="true">Lunch</button>
@@ -49,70 +44,113 @@
           <button class="time-button" type="button" data-time="dinner" aria-pressed="false">Dinner</button>
           <button class="time-button" type="button" data-time="late-night" aria-pressed="false">Late night</button>
         </div>
-        <div class="selection" aria-live="polite"><h3 id="result-title">Lunch picks: bright, beachy, and easygoing.</h3><p id="result-detail">Three sample ideas for a midday reset.</p></div>
+        <div class="selection" aria-live="polite"><h3 id="result-title">Lunch pick: downtown barbecue.</h3><p id="result-detail">One source-checked choice for a midday meal.</p></div>
         <div class="cards" id="cards" aria-live="polite"></div>
-        <aside class="rule"><b>Guide rule</b><span>Every recommendation shows its time fit, price tier, typical wait estimate, and vibe before you choose it.</span></aside>
+        <aside class="truth"><b>Accuracy rule</b><span>Every result shows time fit, a listed menu price, its published wait status, and a venue-described vibe before you choose it.</span></aside>
       </div>
     </section>
-
     <section class="how" aria-labelledby="how-title">
-      <div><h2 id="how-title">A simple way to land somewhere delicious.</h2><p>Made for visitors who want a quick decision without hiding the details that shape it.</p></div>
+      <div><h2 id="how-title">Real places. Clear limits.</h2><p>This page is designed to make a fast food decision without pretending static research can know what a restaurant is like right now.</p></div>
       <div class="steps">
-        <article class="step"><span class="number">1</span><div><h3>Choose your moment</h3><p>Breakfast through late night, depending on the kind of outing you want.</p></div></article>
-        <article class="step"><span class="number">2</span><div><h3>Scan the useful stuff</h3><p>Time fit, a sample price tier, a typical wait estimate, and the room’s mood stay visible on every card.</p></div></article>
-        <article class="step"><span class="number">3</span><div><h3>Verify before you go</h3><p>This starter uses fictional sample listings. Check a restaurant’s real menu, hours, and availability before visiting.</p></div></article>
+        <article class="step"><span class="number">1</span><div><h3>Choose your time</h3><p>The picker matches a restaurant’s published service window to the moment you want to eat.</p></div></article>
+        <article class="step"><span class="number">2</span><div><h3>See the essential facts</h3><p>Hours, a menu price, wait status, and venue-described setting stay visible on the result card.</p></div></article>
+        <article class="step"><span class="number">3</span><div><h3>Open the official source</h3><p>Check the restaurant’s own page or official ordering page for updates before leaving.</p></div></article>
       </div>
     </section>
-
-    <footer class="footer"><p>Food in SLO is a student project concept. Names, prices, waits, and descriptions shown here are fictional samples, not live restaurant information.</p></footer>
+    <footer class="footer"><p>Restaurant names and details are source-checked research, not endorsements or rankings. Live availability, queues, and changes after September 11, 2026 are outside this static guide.</p></footer>
   </main>
   <script>
     (function () {
       var recommendations = {
         breakfast: {
-          title: "Breakfast picks: sunny, slow, and worth the first stroll.",
-          detail: "Three sample ideas for an unhurried morning.",
-          places: [
-            {name:"Golden Hour Toast", food:"Citrus ricotta toast + coffee", fit:"Breakfast · 8–11am", price:"$$ · sample", wait:"10–20 min · sample", vibe:"Sunlit patio", icon:"🍞", color:"#ffe2a6"},
-            {name:"Salt + Maple", food:"Waffles with berry compote", fit:"Breakfast · 8–11am", price:"$$ · sample", wait:"15–25 min · sample", vibe:"Cozy surf cabin", icon:"🧇", color:"#f8c9a8"},
-            {name:"Canyon Smoothie Bar", food:"Tropical bowl + cold brew", fit:"Breakfast · 8–11am", price:"$ · sample", wait:"5–15 min · sample", vibe:"Grab-and-go fresh", icon:"🥭", color:"#c6e9bf"}
-          ]
+          title: "Breakfast pick: brunch at the Public Market.",
+          detail: "A source-checked morning option; verify the day before heading over.",
+          place: {
+            name: "Twenty South",
+            food: "Breakfast burrito with bacon, eggs, potatoes, cheese, chives, and pico is listed at $14.",
+            fit: "Wed–Sun · 8am–2pm",
+            price: "$14 burrito",
+            wait: "Not published",
+            vibe: "Coffee + kitchen at SLO Public Market",
+            icon: "🌯",
+            color: "#ffe1a8",
+            sources: [
+              {label:"Official hours", url:"https://www.twentysouth.co/brunch-slo"},
+              {label:"Official ordering menu", url:"https://www.toasttab.com/local/order/twentysouth-3845-south-higuera-street-ste-114"}
+            ]
+          }
         },
         lunch: {
-          title: "Lunch picks: bright, beachy, and easygoing.",
-          detail: "Three sample ideas for a midday reset.",
-          places: [
-            {name:"Sandbar Tacos", food:"Crispy fish tacos + lime slaw", fit:"Lunch · 11am–2pm", price:"$$ · sample", wait:"15–25 min · sample", vibe:"Sandy picnic tables", icon:"🌮", color:"#ffe0a9"},
-            {name:"Pacific Greens", food:"Herby grain bowl + avocado", fit:"Lunch · 11am–2pm", price:"$$ · sample", wait:"10–20 min · sample", vibe:"Clean coastal café", icon:"🥗", color:"#c9e8bd"},
-            {name:"Boardwalk Burgers", food:"Smash burger + salty fries", fit:"Lunch · 11am–2pm", price:"$$ · sample", wait:"20–30 min · sample", vibe:"Loud and sunny", icon:"🍔", color:"#ffd1ab"}
-          ]
+          title: "Lunch pick: downtown barbecue.",
+          detail: "A source-checked downtown lunch option with a simple, listed price.",
+          place: {
+            name: "Firestone Grill",
+            food: "The official menu lists a sliced tri-tip sandwich with BBQ sauce on a French roll for $11.",
+            fit: "Sun–Thu · 11am–9pm; Fri–Sat · 11am–10pm",
+            price: "$11 tri-tip",
+            wait: "Not published",
+            vibe: "Downtown barbecue and burgers",
+            icon: "🥪",
+            color: "#ffd2ae",
+            sources: [
+              {label:"Official hours", url:"https://www.firestonegrill.com/locations/firestone-grill-san-luis-obispo/"},
+              {label:"Official menu", url:"https://www.firestonegrill.com/menu/"}
+            ]
+          }
         },
         afternoon: {
-          title: "Afternoon picks: snacky, breezy, and shareable.",
-          detail: "Three sample ideas for the in-between hours.",
-          places: [
-            {name:"Driftwood Gelato", food:"Sea-salt caramel scoop", fit:"Afternoon · 2–5pm", price:"$ · sample", wait:"5–10 min · sample", vibe:"Beach walk treat", icon:"🍨", color:"#bddfed"},
-            {name:"The Picnic Window", food:"Warm focaccia + sparkling citrus", fit:"Afternoon · 2–5pm", price:"$ · sample", wait:"5–15 min · sample", vibe:"Low-key market stop", icon:"🥪", color:"#f0dfa4"},
-            {name:"Wave House Coffee", food:"Iced espresso + almond pastry", fit:"Afternoon · 2–5pm", price:"$ · sample", wait:"10–15 min · sample", vibe:"Laptop-and-surfboards", icon:"☕", color:"#e8c5b1"}
-          ]
+          title: "Afternoon pick: garden-patio snacks.",
+          detail: "A source-checked choice for an all-day menu after the lunch rush.",
+          place: {
+            name: "Piadina",
+            food: "Pomme frites with lemon aioli and ketchup are listed at $14 on the lunch and dinner menu.",
+            fit: "All-day menu · daily 11:30am–9pm",
+            price: "$14 pomme frites",
+            wait: "Not published",
+            vibe: "Garden patio; Italian + Central Coast fare",
+            icon: "🍟",
+            color: "#c9e9c3",
+            sources: [
+              {label:"Official hours", url:"https://piadinaslo.com/"},
+              {label:"Official menu", url:"https://piadinaslo.com/menus/lunch-dinner/"}
+            ]
+          }
         },
         dinner: {
-          title: "Dinner picks: golden hour plates and longer hangs.",
-          detail: "Three sample ideas for when the day winds down.",
-          places: [
-            {name:"Tidepool Pasta", food:"Chili-lemon linguine", fit:"Dinner · 5–9pm", price:"$$$ · sample", wait:"25–40 min · sample", vibe:"Date-night warm", icon:"🍝", color:"#ffd2a5"},
-            {name:"West Coast Table", food:"Wood-fired vegetables + flatbread", fit:"Dinner · 5–9pm", price:"$$ · sample", wait:"20–35 min · sample", vibe:"Golden patio glow", icon:"🫓", color:"#f0c89a"},
-            {name:"SLO Ramen Club", food:"Miso noodles + chili crisp", fit:"Dinner · 5–9pm", price:"$$ · sample", wait:"15–30 min · sample", vibe:"Busy and casual", icon:"🍜", color:"#d0e5bd"}
-          ]
+          title: "Dinner pick: creekside global fare.",
+          detail: "A source-checked evening option with its dinner service window and menu price.",
+          place: {
+            name: "Novo Restaurant & Lounge",
+            food: "Chow Novo—wheat noodles with market vegetables, garlic, ginger, sesame, and soy—is listed at $23.",
+            fit: "Dinner · daily 5–9pm",
+            price: "$23 Chow Novo",
+            wait: "Not published",
+            vibe: "Creekside patio and global fare",
+            icon: "🍜",
+            color: "#c7e2ef",
+            sources: [
+              {label:"Official dinner menu", url:"https://www.novorestaurant.com/dinner"},
+              {label:"Official hours", url:"https://www.novorestaurant.com/contact-us"}
+            ]
+          }
         },
         "late-night": {
-          title: "Late-night picks: salty, comforting, and still lively.",
-          detail: "Three sample ideas for a final stop after dark.",
-          places: [
-            {name:"Moonlight Slice", food:"Pepperoni pizza by the slice", fit:"Late night · 9pm–12am", price:"$ · sample", wait:"5–15 min · sample", vibe:"Post-show energy", icon:"🍕", color:"#f6c39e"},
-            {name:"Night Market Noodles", food:"Garlic noodles + crisp tofu", fit:"Late night · 9pm–12am", price:"$$ · sample", wait:"15–25 min · sample", vibe:"Neon and chatty", icon:"🥡", color:"#c7def0"},
-            {name:"The Last Fry", food:"Loaded fries + dipping sauce", fit:"Late night · 9pm–12am", price:"$ · sample", wait:"10–20 min · sample", vibe:"No-frills comfort", icon:"🍟", color:"#ffe094"}
-          ]
+          title: "Late-night pick: downtown kitchen + lounge.",
+          detail: "A source-checked late option for the specific nights the venue publishes as open late.",
+          place: {
+            name: "Feral Kitchen + Lounge",
+            food: "Feral Fries are listed at $13 on the restaurant’s official online ordering page.",
+            fit: "Thu · 3pm–late; Fri–Sat · 11am–late",
+            price: "$13 Feral Fries",
+            wait: "Not published",
+            vibe: "Downtown kitchen + lounge",
+            icon: "🍟",
+            color: "#efc7b8",
+            sources: [
+              {label:"Official hours", url:"https://www.feralkitchenandlounge.com/"},
+              {label:"Official ordering menu", url:"https://order.toasttab.com/online/feral-725-higuera-street"}
+            ]
+          }
         }
       };
 
@@ -144,27 +182,35 @@
         var content = document.createElement("div");
         content.className = "card-content";
         var kicker = document.createElement("p");
-        kicker.className = "card-kicker";
-        kicker.textContent = "Fictional sample";
+        kicker.className = "kicker";
+        kicker.textContent = "Research checked · Sep 11, 2026";
         var name = document.createElement("h4");
         name.textContent = place.name;
         var food = document.createElement("p");
+        food.className = "description";
         food.textContent = place.food;
         var facts = document.createElement("div");
         facts.className = "facts";
         facts.appendChild(fact("Time fit", place.fit));
-        facts.appendChild(fact("Price", place.price));
+        facts.appendChild(fact("Listed price", place.price));
         facts.appendChild(fact("Typical wait", place.wait));
         facts.appendChild(fact("Vibe", place.vibe));
-        var link = document.createElement("a");
-        link.className = "card-link";
-        link.href = "#how-title";
-        link.textContent = "How to use this guide";
+        var sources = document.createElement("div");
+        sources.className = "sources";
+        place.sources.forEach(function (source) {
+          var link = document.createElement("a");
+          link.className = "source-link";
+          link.href = source.url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = source.label + " ↗";
+          sources.appendChild(link);
+        });
         content.appendChild(kicker);
         content.appendChild(name);
         content.appendChild(food);
         content.appendChild(facts);
-        content.appendChild(link);
+        content.appendChild(sources);
         article.appendChild(art);
         article.appendChild(content);
         return article;
@@ -174,8 +220,7 @@
         var result = recommendations[time];
         title.textContent = result.title;
         detail.textContent = result.detail;
-        cards.replaceChildren();
-        result.places.forEach(function (place) { cards.appendChild(card(place)); });
+        cards.replaceChildren(card(result.place));
         buttons.forEach(function (button) {
           button.setAttribute("aria-pressed", String(button.dataset.time === time));
         });
