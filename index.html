@@ -1,24 +1,191 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>My next idea · The Understudy</title>
-<style>*{box-sizing:border-box}body{margin:0;background:#f5f2e9;color:#20281f;font:18px/1.55 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:40px 6vw}header{display:flex;justify-content:space-between;border-bottom:1px solid #b8bcae;padding-bottom:22px;font-size:13px;letter-spacing:.12em;text-transform:uppercase}.stage{display:grid;grid-template-columns:1.5fr 1fr;gap:7vw;align-items:center;min-height:65vh}h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(60px,8vw,112px);letter-spacing:-.06em;line-height:.96;margin:40px 0 25px}p{max-width:530px}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase}.mark{height:280px;position:relative;display:grid;place-items:center}.mark span{position:absolute;width:160px;height:220px;border:2px solid #42613b;transform:rotate(var(--r));transition:transform .5s}.mark span:nth-child(1){--r:-25deg}.mark span:nth-child(2){--r:0deg;background:#dbe4be}.mark span:nth-child(3){--r:25deg}.mark:hover span{transform:rotate(calc(var(--r) * 1.3))}a{color:inherit;text-underline-offset:5px}.links{display:flex;flex-wrap:wrap;gap:24px;padding:25px 0}.primary{background:#263d24;color:#fff;padding:12px 20px;text-decoration:none}footer{border-top:1px solid #b8bcae;padding-top:24px;font-size:14px}a:focus-visible{outline:3px solid #a54919;outline-offset:5px}@media(max-width:650px){.stage{display:block;min-height:0}.mark{height:170px;margin:30px 0}.mark span{width:100px;height:140px}header{gap:20px}main{padding:25px 7vw}}@media(prefers-reduced-motion:reduce){.mark span{transition:none}.mark:hover span{transform:rotate(var(--r))}}.live{border-top:1px solid #b8bcae;padding:22px 0 4px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}.live code{flex:1 1 300px;min-width:0;background:#fff;border:1px solid #b8bcae;padding:11px 13px;font-size:14px;overflow-wrap:anywhere}.live button{min-height:44px;padding:11px 18px;font:inherit;font-weight:600;color:#fff;background:#263d24;border:0;cursor:pointer}.live button:focus-visible{outline:3px solid #a54919;outline-offset:5px}.live small{flex-basis:100%;font-size:14px;color:#4a5247}</style>
-<main><header><b>CPVC / The Understudy</b><span>Session 02 · Starter</span></header><section class="stage"><div><h1>A small site.<br>A real beginning.</h1><p>This is my working starter. My own one-page site and one useful interaction come next.</p><p class="eyebrow">Published first. Made mine next.</p></div><div class="mark" aria-hidden="true"><span></span><span></span><span></span></div></section><div class="live"><code id="liveurl">Open this page over http:// or https:// to see its address.</code><button id="copy" type="button">Copy link</button><small id="copyhint">This is the address you submit. Not your GitHub repository address.</small></div><div class="links"><a class="primary" href="https://calpolyvibecoding.com/portal">Submit my live URL ↗</a><a id="guide" href="https://github.com/calpolyvibecoding-01/cpvc-02-understudy-template#readme">Follow the build guide →</a><a href="examples/coast/">See the coastal example →</a></div><footer>Deploy this untouched starter, open the actual live URL, then confirm your portal submission. <strong>STOP 1:</strong> only then brief the agent and build your own idea. Keep the same root URL as your site grows.</footer></main>
-<script>
-(function(){
-  var box=document.getElementById('liveurl'),btn=document.getElementById('copy'),
-      hint=document.getElementById('copyhint'),guide=document.getElementById('guide');
-  var web=location.protocol==='http:'||location.protocol==='https:';
-  var url=web?location.origin+location.pathname:'';
-  if(web){box.textContent=url;}else{btn.hidden=true;hint.textContent='You are viewing this file directly. Publish it with GitHub Pages to get a real address.';}
-  var host=location.hostname.match(/^([a-z0-9-]+)\.github\.io$/i),
-      repo=location.pathname.split('/').filter(Boolean)[0];
-  if(host&&repo){guide.href='https://github.com/'+host[1]+'/'+repo+'#readme';}
-  btn.addEventListener('click',function(){
-    function pick(){var r=document.createRange();r.selectNodeContents(box);
-      var s=window.getSelection();s.removeAllRanges();s.addRange(r);
-      hint.textContent='Link selected. Press Ctrl+C or Cmd+C to copy it.';}
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(url).then(function(){hint.textContent='Copied. Paste it into the Link field in the portal.';},pick);
-    }else{pick();}
-  });
-})();
-</script>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Food in SLO · Find a bite by time</title>
+  <meta name="description" content="A sample time-of-day food picker for visitors to San Luis Obispo.">
+  <style>
+    :root{--ink:#13374a;--ocean:#047c98;--surf:#9ed9d0;--sand:#fff2d8;--foam:#fdfbf4;--sun:#ffb642;--coral:#e85e4f;--muted:#53717d;--line:#c5ded9;--shadow:0 18px 45px rgba(19,55,74,.13)}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;color:var(--ink);background:var(--foam);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 12% 0,rgba(255,182,66,.3),transparent 23rem),linear-gradient(180deg,#d9f0e9 0, #fdfbf4 42%)}
+    a{color:inherit;text-underline-offset:4px}.shell{width:min(1120px,92vw);margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;padding:24px 0;border-bottom:1px solid rgba(19,55,74,.2);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}.brand{font-weight:800;color:var(--ocean)}.tag{color:var(--muted)}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:3rem;padding:clamp(3.25rem,8vw,6.5rem) 0 3.25rem}.eyebrow{display:inline-flex;align-items:center;gap:.5rem;margin:0 0 1rem;font-size:.78rem;letter-spacing:.14em;font-weight:800;text-transform:uppercase;color:var(--ocean)}.eyebrow:before{content:"";height:.6rem;width:.6rem;border-radius:50%;background:var(--coral)}
+    h1{max-width:720px;margin:0;font-family:Georgia,serif;font-size:clamp(3.4rem,7vw,6.6rem);line-height:.91;letter-spacing:-.06em;font-weight:500}.hero p{max-width:570px;margin:1.5rem 0 0;font-size:1.1rem;color:#305564}.hero strong{color:var(--ocean)}
+    .food-art{position:relative;min-height:330px;display:grid;place-items:center}.sun{position:absolute;top:10px;right:7%;width:92px;height:92px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 13px rgba(255,182,66,.2)}.wave{position:absolute;bottom:10px;left:4%;width:90%;height:88px;border-radius:55% 45% 0 0;background:var(--surf);transform:rotate(-5deg)}.plate{position:relative;z-index:1;width:min(300px,70vw);aspect-ratio:1;border-radius:50%;background:#fff7e8;border:15px solid #e8f1e8;box-shadow:inset 0 0 0 2px #bdd9d2,var(--shadow);display:grid;place-items:center;transform:rotate(-7deg)}.bowl{width:65%;height:42%;border-radius:0 0 100px 100px;background:linear-gradient(180deg,#e85e4f 0 50%,#cc493e 50%);position:relative;overflow:hidden}.bowl:before{content:"";position:absolute;width:150%;height:85%;left:-25%;top:-43%;border-radius:50%;background:repeating-radial-gradient(circle at 45% 70%,#ffe678 0 10px,#75a85d 11px 21px,#e85e4f 22px 29px)}.fork{position:absolute;z-index:2;right:15%;bottom:15%;width:15px;height:120px;background:var(--ink);border-radius:10px;transform:rotate(42deg)}.fork:before{content:"";position:absolute;top:-18px;left:-14px;width:43px;height:35px;border-bottom:10px solid var(--ink);border-radius:0 0 50% 50%;background:repeating-linear-gradient(90deg,transparent 0 8px,var(--ink) 8px 12px)}
+    .picker{padding:1.5rem 0 4rem}.panel{border:1px solid var(--line);border-radius:28px;background:rgba(253,251,244,.88);padding:clamp(1.25rem,4vw,2.6rem);box-shadow:var(--shadow)}.panel-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}.panel h2{margin:0;font:500 clamp(2rem,4vw,3.2rem)/1 Georgia,serif;letter-spacing:-.04em}.sample-note{margin:.75rem 0 0;color:var(--muted);font-size:.9rem}.time-buttons{display:flex;gap:.65rem;flex-wrap:wrap;margin:1.75rem 0 2rem}.time-button{border:1px solid var(--line);border-radius:999px;padding:.7rem 1rem;color:var(--ink);background:#fffdf7;font:inherit;font-weight:750;cursor:pointer;transition:transform .16s ease,background .16s ease,color .16s ease,border-color .16s ease}.time-button:hover{transform:translateY(-2px);border-color:var(--ocean)}.time-button[aria-pressed="true"]{background:var(--ocean);border-color:var(--ocean);color:white}.time-button:focus-visible,.card-link:focus-visible{outline:3px solid var(--coral);outline-offset:4px}
+    .selection{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-top:1px solid var(--line);padding-top:1.2rem}.selection p{margin:0;color:var(--muted)}.selection h3{margin:0;font-size:1.1rem}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:1.2rem}.card{overflow:hidden;border:1px solid var(--line);border-radius:20px;background:white;box-shadow:0 8px 20px rgba(19,55,74,.06)}.card-art{height:125px;display:flex;align-items:center;justify-content:center;font-size:4rem;background:var(--card-bg);position:relative}.card-art:after{content:"";position:absolute;width:125%;height:50px;bottom:-30px;border-radius:50%;background:rgba(255,255,255,.35)}.card-content{padding:1.1rem}.card-kicker{margin:0;color:var(--ocean);font-size:.73rem;letter-spacing:.11em;font-weight:800;text-transform:uppercase}.card h4{margin:.3rem 0 .5rem;font:500 1.5rem/1.05 Georgia,serif;letter-spacing:-.03em}.card p{margin:0;color:var(--muted);font-size:.91rem}.facts{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin:1rem 0 0}.fact{min-height:54px;border-radius:12px;padding:.48rem .6rem;background:var(--sand)}.fact span{display:block;font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#52727c}.fact b{font-size:.85rem}.card-link{display:inline-block;margin-top:1rem;font-weight:800;color:var(--ocean);text-decoration:none}.card-link:hover{text-decoration:underline}
+    .rule{display:flex;gap:.9rem;align-items:flex-start;margin:2.5rem 0 0;padding:1rem 1.1rem;border-radius:15px;background:#d9f0e9;color:#235867}.rule b{color:var(--ocean);white-space:nowrap}.how{display:grid;grid-template-columns:.7fr 1.3fr;gap:3rem;padding:3rem 0 5rem}.how h2{margin:0;font:500 clamp(2rem,4vw,3.2rem)/1 Georgia,serif;letter-spacing:-.04em}.how p{margin:.3rem 0 0;color:var(--muted)}.steps{display:grid;gap:1rem}.step{display:flex;gap:1rem;padding:1rem 0;border-top:1px solid var(--line)}.number{display:grid;place-items:center;flex:0 0 31px;height:31px;border-radius:50%;background:var(--coral);color:white;font-size:.85rem;font-weight:800}.step h3{margin:0}.step p{margin:.15rem 0 0}.footer{padding:1.7rem 0 2.5rem;border-top:1px solid rgba(19,55,74,.2);color:var(--muted);font-size:.88rem}.footer p{margin:0}
+    @media(max-width:780px){.hero,.how{grid-template-columns:1fr}.hero{gap:1rem;padding-top:3.5rem}.food-art{min-height:230px;order:-1}.plate{width:220px}.cards{grid-template-columns:1fr}.card{display:grid;grid-template-columns:120px 1fr}.card-art{height:auto;min-height:100%;font-size:3rem}.card-content{padding:1rem}.facts{margin-top:.7rem}.how{gap:1.4rem}}@media(max-width:500px){.topbar{align-items:flex-start;gap:1rem;line-height:1.35}.tag{text-align:right}.panel{border-radius:20px}.selection{align-items:flex-start;flex-direction:column;gap:.3rem}.card{display:block}.card-art{height:115px}.facts{grid-template-columns:1fr 1fr}.rule{display:block}.rule b{display:block;margin-bottom:.35rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.time-button{transition:none}.time-button:hover{transform:none}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Food in SLO home">Food in SLO</a>
+      <span class="tag">Sample visitor guide · San Luis Obispo, CA</span>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Eat with the sun</p>
+        <h1 id="page-title">Your next SLO bite starts with the time.</h1>
+        <p>Pick the moment. We’ll point you toward a <strong>sample food match</strong> with a price, typical wait, and coastal-casual mood already in view.</p>
+      </div>
+      <div class="food-art" aria-label="Illustration of a colorful food bowl in the California sunshine" role="img">
+        <div class="sun"></div><div class="wave"></div><div class="plate"><div class="bowl"></div></div><div class="fork"></div>
+      </div>
+    </section>
+
+    <section class="picker" aria-labelledby="picker-title">
+      <div class="panel">
+        <div class="panel-head">
+          <div><h2 id="picker-title">What time are you hungry?</h2><p class="sample-note">Sample recommendations and estimates — verify real restaurant details before visiting.</p></div>
+        </div>
+        <div class="time-buttons" role="group" aria-label="Choose a time of day">
+          <button class="time-button" type="button" data-time="breakfast" aria-pressed="false">Breakfast</button>
+          <button class="time-button" type="button" data-time="lunch" aria-pressed="true">Lunch</button>
+          <button class="time-button" type="button" data-time="afternoon" aria-pressed="false">Afternoon</button>
+          <button class="time-button" type="button" data-time="dinner" aria-pressed="false">Dinner</button>
+          <button class="time-button" type="button" data-time="late-night" aria-pressed="false">Late night</button>
+        </div>
+        <div class="selection" aria-live="polite"><h3 id="result-title">Lunch picks: bright, beachy, and easygoing.</h3><p id="result-detail">Three sample ideas for a midday reset.</p></div>
+        <div class="cards" id="cards" aria-live="polite"></div>
+        <aside class="rule"><b>Guide rule</b><span>Every recommendation shows its time fit, price tier, typical wait estimate, and vibe before you choose it.</span></aside>
+      </div>
+    </section>
+
+    <section class="how" aria-labelledby="how-title">
+      <div><h2 id="how-title">A simple way to land somewhere delicious.</h2><p>Made for visitors who want a quick decision without hiding the details that shape it.</p></div>
+      <div class="steps">
+        <article class="step"><span class="number">1</span><div><h3>Choose your moment</h3><p>Breakfast through late night, depending on the kind of outing you want.</p></div></article>
+        <article class="step"><span class="number">2</span><div><h3>Scan the useful stuff</h3><p>Time fit, a sample price tier, a typical wait estimate, and the room’s mood stay visible on every card.</p></div></article>
+        <article class="step"><span class="number">3</span><div><h3>Verify before you go</h3><p>This starter uses fictional sample listings. Check a restaurant’s real menu, hours, and availability before visiting.</p></div></article>
+      </div>
+    </section>
+
+    <footer class="footer"><p>Food in SLO is a student project concept. Names, prices, waits, and descriptions shown here are fictional samples, not live restaurant information.</p></footer>
+  </main>
+  <script>
+    (function () {
+      var recommendations = {
+        breakfast: {
+          title: "Breakfast picks: sunny, slow, and worth the first stroll.",
+          detail: "Three sample ideas for an unhurried morning.",
+          places: [
+            {name:"Golden Hour Toast", food:"Citrus ricotta toast + coffee", fit:"Breakfast · 8–11am", price:"$$ · sample", wait:"10–20 min · sample", vibe:"Sunlit patio", icon:"🍞", color:"#ffe2a6"},
+            {name:"Salt + Maple", food:"Waffles with berry compote", fit:"Breakfast · 8–11am", price:"$$ · sample", wait:"15–25 min · sample", vibe:"Cozy surf cabin", icon:"🧇", color:"#f8c9a8"},
+            {name:"Canyon Smoothie Bar", food:"Tropical bowl + cold brew", fit:"Breakfast · 8–11am", price:"$ · sample", wait:"5–15 min · sample", vibe:"Grab-and-go fresh", icon:"🥭", color:"#c6e9bf"}
+          ]
+        },
+        lunch: {
+          title: "Lunch picks: bright, beachy, and easygoing.",
+          detail: "Three sample ideas for a midday reset.",
+          places: [
+            {name:"Sandbar Tacos", food:"Crispy fish tacos + lime slaw", fit:"Lunch · 11am–2pm", price:"$$ · sample", wait:"15–25 min · sample", vibe:"Sandy picnic tables", icon:"🌮", color:"#ffe0a9"},
+            {name:"Pacific Greens", food:"Herby grain bowl + avocado", fit:"Lunch · 11am–2pm", price:"$$ · sample", wait:"10–20 min · sample", vibe:"Clean coastal café", icon:"🥗", color:"#c9e8bd"},
+            {name:"Boardwalk Burgers", food:"Smash burger + salty fries", fit:"Lunch · 11am–2pm", price:"$$ · sample", wait:"20–30 min · sample", vibe:"Loud and sunny", icon:"🍔", color:"#ffd1ab"}
+          ]
+        },
+        afternoon: {
+          title: "Afternoon picks: snacky, breezy, and shareable.",
+          detail: "Three sample ideas for the in-between hours.",
+          places: [
+            {name:"Driftwood Gelato", food:"Sea-salt caramel scoop", fit:"Afternoon · 2–5pm", price:"$ · sample", wait:"5–10 min · sample", vibe:"Beach walk treat", icon:"🍨", color:"#bddfed"},
+            {name:"The Picnic Window", food:"Warm focaccia + sparkling citrus", fit:"Afternoon · 2–5pm", price:"$ · sample", wait:"5–15 min · sample", vibe:"Low-key market stop", icon:"🥪", color:"#f0dfa4"},
+            {name:"Wave House Coffee", food:"Iced espresso + almond pastry", fit:"Afternoon · 2–5pm", price:"$ · sample", wait:"10–15 min · sample", vibe:"Laptop-and-surfboards", icon:"☕", color:"#e8c5b1"}
+          ]
+        },
+        dinner: {
+          title: "Dinner picks: golden hour plates and longer hangs.",
+          detail: "Three sample ideas for when the day winds down.",
+          places: [
+            {name:"Tidepool Pasta", food:"Chili-lemon linguine", fit:"Dinner · 5–9pm", price:"$$$ · sample", wait:"25–40 min · sample", vibe:"Date-night warm", icon:"🍝", color:"#ffd2a5"},
+            {name:"West Coast Table", food:"Wood-fired vegetables + flatbread", fit:"Dinner · 5–9pm", price:"$$ · sample", wait:"20–35 min · sample", vibe:"Golden patio glow", icon:"🫓", color:"#f0c89a"},
+            {name:"SLO Ramen Club", food:"Miso noodles + chili crisp", fit:"Dinner · 5–9pm", price:"$$ · sample", wait:"15–30 min · sample", vibe:"Busy and casual", icon:"🍜", color:"#d0e5bd"}
+          ]
+        },
+        "late-night": {
+          title: "Late-night picks: salty, comforting, and still lively.",
+          detail: "Three sample ideas for a final stop after dark.",
+          places: [
+            {name:"Moonlight Slice", food:"Pepperoni pizza by the slice", fit:"Late night · 9pm–12am", price:"$ · sample", wait:"5–15 min · sample", vibe:"Post-show energy", icon:"🍕", color:"#f6c39e"},
+            {name:"Night Market Noodles", food:"Garlic noodles + crisp tofu", fit:"Late night · 9pm–12am", price:"$$ · sample", wait:"15–25 min · sample", vibe:"Neon and chatty", icon:"🥡", color:"#c7def0"},
+            {name:"The Last Fry", food:"Loaded fries + dipping sauce", fit:"Late night · 9pm–12am", price:"$ · sample", wait:"10–20 min · sample", vibe:"No-frills comfort", icon:"🍟", color:"#ffe094"}
+          ]
+        }
+      };
+
+      var cards = document.getElementById("cards");
+      var title = document.getElementById("result-title");
+      var detail = document.getElementById("result-detail");
+      var buttons = Array.prototype.slice.call(document.querySelectorAll(".time-button"));
+
+      function fact(label, value) {
+        var item = document.createElement("div");
+        item.className = "fact";
+        var labelElement = document.createElement("span");
+        labelElement.textContent = label;
+        var valueElement = document.createElement("b");
+        valueElement.textContent = value;
+        item.appendChild(labelElement);
+        item.appendChild(valueElement);
+        return item;
+      }
+
+      function card(place) {
+        var article = document.createElement("article");
+        article.className = "card";
+        var art = document.createElement("div");
+        art.className = "card-art";
+        art.style.setProperty("--card-bg", place.color);
+        art.setAttribute("aria-hidden", "true");
+        art.textContent = place.icon;
+        var content = document.createElement("div");
+        content.className = "card-content";
+        var kicker = document.createElement("p");
+        kicker.className = "card-kicker";
+        kicker.textContent = "Fictional sample";
+        var name = document.createElement("h4");
+        name.textContent = place.name;
+        var food = document.createElement("p");
+        food.textContent = place.food;
+        var facts = document.createElement("div");
+        facts.className = "facts";
+        facts.appendChild(fact("Time fit", place.fit));
+        facts.appendChild(fact("Price", place.price));
+        facts.appendChild(fact("Typical wait", place.wait));
+        facts.appendChild(fact("Vibe", place.vibe));
+        var link = document.createElement("a");
+        link.className = "card-link";
+        link.href = "#how-title";
+        link.textContent = "How to use this guide";
+        content.appendChild(kicker);
+        content.appendChild(name);
+        content.appendChild(food);
+        content.appendChild(facts);
+        content.appendChild(link);
+        article.appendChild(art);
+        article.appendChild(content);
+        return article;
+      }
+
+      function render(time) {
+        var result = recommendations[time];
+        title.textContent = result.title;
+        detail.textContent = result.detail;
+        cards.replaceChildren();
+        result.places.forEach(function (place) { cards.appendChild(card(place)); });
+        buttons.forEach(function (button) {
+          button.setAttribute("aria-pressed", String(button.dataset.time === time));
+        });
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () { render(button.dataset.time); });
+      });
+      render("lunch");
+    }());
+  </script>
+</body>
 </html>
